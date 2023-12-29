@@ -6,8 +6,6 @@ RUN gem install copilot2gpt
 
 WORKDIR /
 
-EXPOSE 4567
+EXPOSE 8080
 
 ENTRYPOINT ["copilot2gpt"]
-
-CMD ["-p", "4567"]
