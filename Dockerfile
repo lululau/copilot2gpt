@@ -1,4 +1,4 @@
-FROM rubylane/ruby:3.2
+FROM rubylang/ruby:3.2
 
 LABEL maintainer="Liu Xiang<liuxiang921@gmail.com>"
 
