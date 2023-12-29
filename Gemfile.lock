@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    copilot2gpt (0.1.0)
+    copilot2gpt (0.1.1)
       activesupport (~> 7.0.0)
       faraday (~> 2.8.1)
       puma (~> 6.3.0)
