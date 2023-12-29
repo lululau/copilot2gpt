@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "sinatra"
+require "copilot2gpt"
+require "copilot2gpt/app"
