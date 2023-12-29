@@ -1,39 +1,70 @@
-# Copilot2gpt
+# Copilot 2 GPT-4
 
-TODO: Delete this and the text below, and describe your gem
+This is a Sinatra-based application that serves as a bridge between GitHub Copilot and GPT-4 model. It provides endpoints to interact with the GPT-4 model and handles authorization using GitHub tokens.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/copilot2gpt`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Getting Started
 
-## Installation
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+### Prerequisites
 
-Install the gem and add to the application's Gemfile by executing:
+You need to have Ruby installed on your machine. You can check if you have Ruby installed by running:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+```bash
+ruby -v
+```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+### Installing
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+Clone the repository:
 
-## Usage
+```bash
+git clone https://github.com/lululau/copilot2gpt.git
+cd copilot2gpt
+```
 
-TODO: Write usage instructions here
+Install the required gems:
 
-## Development
+```bash
+bundle install
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### Running the application
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+You can start the application by running:
+
+```bash
+bundle exec exe/copilot2gpt
+```
+
+The application will start on port 8080.
+
+## API Endpoints
+
+The application provides the following endpoints:
+
+- `GET /openai/models`: Returns a list of available models.
+- `POST /openai/chat/completions`: Mocks a Cloudflare AI Gateway API
+- `POST /v1/chat/completions`: Completes a chat with the AI model.
+
+## Docker
+
+This application can also be run in a Docker container. Build the Docker image by running:
+
+```bash
+docker build -t your-image-name .
+```
+
+Then, you can start the application in a Docker container by running:
+
+```bash
+docker run -p 8080:8080 your-image-name
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/lululau/copilot2gpt. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/lululau/copilot2gpt/blob/master/CODE_OF_CONDUCT.md).
+Please read [CONTRIBUTING.md](https://github.com/lululau/copilot2gpt/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the Copilot2gpt project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/lululau/copilot2gpt/blob/master/CODE_OF_CONDUCT.md).
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/lululau/copilot2gpt/blob/main/LICENSE.md) file for details.
