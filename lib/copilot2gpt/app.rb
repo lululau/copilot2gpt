@@ -31,14 +31,19 @@ module Copilot2GPT
 
     post('/openai/chat/completions') do
       @mock_ai_gateway = true
-      complete
+      complete(JSON.parse(request.body.read, symbolize_names: true))
     end
 
     post('/v1/chat/completions') do
-      complete
+      complete(JSON.parse(request.body.read, symbolize_names: true))
     end
 
-    def complete
+    post('/openai/chat/completions/no-stream') do
+      @mock_ai_gateway = true
+      complete(JSON.parse(request.body.read, symbolize_names: true).merge(stream: false))
+    end
+
+    def complete(args)
       github_token = request.env['HTTP_AUTHORIZATION'].to_s.sub('Bearer ', '')
       if github_token.empty?
         halt 401, {'Content-Type' => 'application/json'}, {:message => 'Unauthorized'}.to_json
@@ -46,7 +51,7 @@ module Copilot2GPT
       @copilot_token = Copilot2gpt::Token.get_copilot_token(github_token)
       content = params['content']
       url = "https://api.githubcopilot.com/chat/completions"
-      chat_request = Copilot2GPT::ChatRequest.with_default(content, JSON.parse(request.body.read, symbolize_names: true))
+      chat_request = Copilot2GPT::ChatRequest.with_default(content, args)
       conn = Faraday.new(url: url)
 
       if !chat_request.one_time_return
@@ -100,10 +105,10 @@ module Copilot2GPT
         end
 
         buffer = ""
-        res.body.each_line do |line|
+        resp.body.each_line do |line|
           if line.start_with?("data: ")
             data = line.sub("data: ", "")
-            obj = JSON.parse(data)
+            obj = JSON.parse(data) rescue next
             if obj.key?("choices") && obj["choices"].is_a?(Array) && !obj["choices"].empty?
               choice = obj["choices"][0]
               if choice.is_a?(Hash) && choice.key?("delta") && choice["delta"].is_a?(Hash)
