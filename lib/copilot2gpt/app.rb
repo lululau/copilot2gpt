@@ -43,6 +43,11 @@ module Copilot2GPT
       complete(JSON.parse(request.body.read, symbolize_names: true).merge(stream: false))
     end
 
+    post('/openai/no-stream/chat/completions') do
+      @mock_ai_gateway = true
+      complete(JSON.parse(request.body.read, symbolize_names: true).merge(stream: false))
+    end
+
     def complete(args)
       github_token = request.env['HTTP_AUTHORIZATION'].to_s.sub('Bearer ', '')
       if github_token.empty?
